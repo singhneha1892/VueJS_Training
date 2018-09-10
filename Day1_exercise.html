@@ -1,0 +1,38 @@
+<style>
+  img{
+    width: 20%;
+    height: 20%;
+  }
+</style>
+<script src="https://unpkg.com/vue"></script>
+<div id="app">
+    <p>1) Interpolated text : {{name}} ({{age}})</p>
+    <p>2) Age multiplied by 3 is {{getCalculatedAge(3)}}</p>
+    <p>3) Random number: {{showRandomNumber()}}</p>
+    <p>4) <img v-bind:src="showImage()"></p>
+    <p>5) <input type="text" v-bind:value="name"></p>
+  </div>
+<script>
+
+new Vue({
+    el: '#app',
+    data: {
+      name: 'Neha',
+      age: 25,
+      imageSource: 'https://cdn.shopify.com/s/files/1/0533/2089/files/vuejs-tutorial_2d2a853c-aa2f-44b0-80df-933b495f77f8.png?v=1509478492'
+    },
+    methods: {
+     getCalculatedAge: function(n){
+        return this.age*n;
+     },
+     showRandomNumber: function(){
+        return Math.random()
+     },
+     showImage: function(){
+        return this.imageSource;
+     }
+    }
+  })
+  </script>
+
+
