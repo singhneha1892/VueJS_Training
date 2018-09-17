@@ -1,0 +1,104 @@
+<head>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ 
+  <style>
+    
+  .highlight {
+    background-color: green;
+    height: 100px;
+    width: 100px !important;
+    }
+
+  .shrink {
+    background-color: orange;
+    height: 100px;
+    width: 30px !important;
+    }
+
+  .size {
+    font-size: 20px;
+  }
+
+  .progessBar {
+    width: 500px;
+    height: 20px;
+    border: 1px solid black;
+  }
+
+  .bar {
+    background-color: orangered;
+    height: 100%;
+  }
+
+  .colour {
+    color: red;
+  }
+</style>
+  </head>
+<div id="exercise4">
+  <div>1. Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval
+    tick. Attach respective class to the div with id "effect" below </div><br>
+  <div>
+    <button @click="handleEffect">Start Effect</button><br>
+    <div id="effect" :class="[toggleEffectFlag ? 'highlight' : 'shrink']"></div>
+  </div>
+  <br>
+  <div>2. Create a couple of CSS classes and attach them via the array syntax </div>
+  <div :class="['colour', 'size']">I need the class!</div>
+  <br>
+  <div>3. Let the user enter a class (create some example classes) and attach it </div>
+  <div>
+    <input v-on:keyup.enter="userTypedClasses" type="text">
+    <div :class="typedClasses"></div>
+  </div>
+  <br>
+  <div>4. Let the user enter a class and attach the classes (space separated) to the div </div>
+  <div>
+    <input v-on:keyup.enter="userTypedClassesWithSpace" type="text">
+    <div :class="typedClassesWithSpace"></div>
+  </div>
+  <br>
+  <div>5. Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. </div>
+  <div>
+    <button v-on:click="startProgress">Start Progress</button>
+    <div class="progessBar">
+      <div class="bar" :style="{width: progress + '%'}"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  new Vue({
+    el: '#exercise4',
+    data: {
+      toggleEffectFlag: true,
+      typedClasses: [],
+      typedClassesWithSpace: null,
+      progress: 0,
+    },
+    methods: {
+      handleEffect: function() {
+                var vm = this;
+                setInterval(function(){ 
+                    vm.toggleEffectFlag = !vm.toggleEffectFlag
+                }, 300);
+            },
+      userTypedClasses: function (e) {
+        this.typedClasses = e.target.value;
+      },
+      userTypedClassesWithSpace: function (e) {
+        this.typedClassesWithSpace = e.target.value.split(" ");
+
+      },
+      startProgress: function () {
+        var vm = this
+        setInterval(function () {
+          if (vm.progress < 50) {
+            vm.progress += 1;
+          }
+
+        }, 100)
+      }
+    }
+  });
+</script>
